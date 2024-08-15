@@ -344,6 +344,8 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>b', group = '[B]uffer' },
+        { '<leader>bd', group = '[B]uffer [D]elete' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
@@ -990,6 +992,15 @@ require('lazy').setup({
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
+
+  {
+    'nikhilmtomy/buf_act.nvim',
+    config = function()
+      local buf_act = require 'buf_act'
+      vim.keymap.set('n', '<leader>bdo', buf_act.delete_others, { desc = '[B]uffer [D]elete [O]thers' })
+      vim.keymap.set('n', '<leader>bdh', buf_act.delete_hidden, { desc = '[B]uffer [D]elete [H]idden' })
+    end,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
