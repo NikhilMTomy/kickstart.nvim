@@ -1001,6 +1001,22 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>bdh', buf_act.delete_hidden, { desc = '[B]uffer [D]elete [H]idden' })
     end,
   },
+
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require('nvim-tree').setup()
+      local api = require 'nvim-tree.api'
+
+      vim.keymap.set('n', '<leader>n', function()
+        if api.tree.is_tree_buf(0) then
+          api.tree.close()
+        else
+          api.tree.open()
+        end
+      end, { silent = true, nowait = true, noremap = true })
+    end,
+  },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
